@@ -4,19 +4,22 @@ def pet_shop_name(pet_shop)
   return pet_shop[:name]
 end
 
-
-# def test_total_cash
-#   sum = total_cash(@pet_shop)
-#   assert_equal(1000, sum)
-# end
-
+def total_cash(pet_shop)
+  return pet_shop[:admin][:total_cash]
+end
 
 
 # def test_add_or_remove_cash__add
+  # # no return value: not needed # #
 #   add_or_remove_cash(@pet_shop,10)
 #   cash = total_cash(@pet_shop)
 #   assert_equal(1010, cash)
 # end
+
+def add_or_remove_cash(pet_shop,money_amount)
+  pet_shop[:admin][:total_cash] += money_amount
+end
+
 
 # def test_add_or_remove_cash__remove
 #   add_or_remove_cash(@pet_shop,-10)
