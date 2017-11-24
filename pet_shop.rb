@@ -58,11 +58,10 @@ def add_pet_to_stock(pet_shop, new_pet_hash)
   return pet_shop
 end
 
-
-# def test_customer_pet_count
-#   count = customer_pet_count(@customers[0])
-#   assert_equal(0, count)
-# end
+def customer_pet_count(customer)
+  # customer must be specified by customer_array[index]
+  return customer[:pets].count
+end
 
 # def test_add_pet_to_customer
 #   customer = @customers[0]
