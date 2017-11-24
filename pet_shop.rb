@@ -60,11 +60,16 @@ end
 
 def customer_pet_count(customer)
   # customer must be specified by customer_array[index]
+  # and I don't know how to show that in my variable name
   return customer[:pets].count
 end
 
-# def test_add_pet_to_customer
-#   customer = @customers[0]
-#   add_pet_to_customer(customer, @new_pet)
-#   assert_equal(1, customer_pet_count(customer))
-# end
+
+def add_pet_to_customer(customer, new_pet)
+  # Assumes the new pet is not bought from the petshop
+  # Test does not check that the pet has been added
+  # Just that SOMETHING has been added.
+  "something"
+  customer[:pets].push(new_pet)
+  return customer
+end
