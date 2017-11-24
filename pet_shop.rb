@@ -8,40 +8,22 @@ def total_cash(pet_shop)
   return pet_shop[:admin][:total_cash]
 end
 
-
-# def test_add_or_remove_cash__add
-  # # no return value: not needed # #
-#   add_or_remove_cash(@pet_shop,10)
-#   cash = total_cash(@pet_shop)
-#   assert_equal(1010, cash)
-# end
-
 def add_or_remove_cash(pet_shop,money_amount)
   pet_shop[:admin][:total_cash] += money_amount
 end
 
+def pets_sold(pet_shop) #actually number_of_pets_sold
+  return pet_shop[:admin][:pets_sold]
+end
 
-# def test_add_or_remove_cash__remove
-#   add_or_remove_cash(@pet_shop,-10)
-#   cash = total_cash(@pet_shop)
-#   assert_equal(990, cash)
-# end
+def increase_pets_sold(pet_shop, number_sold)
+  pet_shop[:admin][:pets_sold] += number_sold
+end
 
-# def test_pets_sold
-#   sold = pets_sold(@pet_shop)
-#   assert_equal(0, sold)
-# end
+def stock_count(pet_shop)
+  return pet_shop[:pets].count
+end
 
-# def test_increase_pets_sold
-#   increase_pets_sold(@pet_shop,2)
-#   sold = pets_sold(@pet_shop)
-#   assert_equal(2, sold)
-# end
-
-# def test_stock_count
-#   count = stock_count(@pet_shop)
-#   assert_equal(6, count)
-# end
 
 # def test_all_pets_by_breed__found
 #   pets = pets_by_breed(@pet_shop, "British Shorthair")
