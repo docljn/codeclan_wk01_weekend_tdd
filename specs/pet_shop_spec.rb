@@ -140,11 +140,18 @@ class TestPetShop < Minitest::Test
     assert_nil(pet)
   end
 
-  # def test_add_pet_to_stock
-  #   add_pet_to_stock(@pet_shop, @new_pet)
-  #   count = stock_count(@pet_shop)
-  #   assert_equal(7, count)
-  # end
+  def test_add_pet_to_stock
+    add_pet_to_stock(@pet_shop, @new_pet)
+    count = stock_count(@pet_shop)
+    assert_equal(7, count)
+  end
+
+  # I HAVE ADDED THIS TEST # #
+  def test_added_pet_in_stock
+    add_pet_to_stock(@pet_shop, @new_pet)
+    result = @pet_shop[:pets].include?(@new_pet)
+    assert_equal(true, result)
+  end
 
   # def test_customer_pet_count
   #   count = customer_pet_count(@customers[0])
