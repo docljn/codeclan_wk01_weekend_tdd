@@ -34,25 +34,22 @@ def pets_by_breed(pet_shop, breed_string)
   return pets_of_breed
 end
 
-# def test_all_pets_by_breed__found
-#   pets = pets_by_breed(@pet_shop, "British Shorthair")
-#   assert_equal(2, pets.count)
-# end
+def find_pet_by_name(pet_shop, name_string)
+  # will only find the first pet with a given name if there are multiples
+  for pet in pet_shop[:pets]
+    return pet if pet[:name] == name_string
+  end
+  return nil
+end
 
-# def test_all_pets_by_breed__not_found
-#   pets = pets_by_breed(@pet_shop, "Dalmation")
-#   assert_equal(0, pets.count)
-# end
-
-# def test_find_pet_by_name__returns_pet
-#   pet = find_pet_by_name(@pet_shop, "Arthur")
-#   assert_equal("Arthur", pet[:name])
-# end
-
-# def test_find_pet_by_name__returns_nil
-#   pet = find_pet_by_name(@pet_shop, "Fred")
-#   assert_nil(pet)
-# end
+def remove_pet_by_name(pet_shop, name_string)
+  # Not sure what I should return here?
+  pets = pet_shop[:pets]
+  for pet in pets
+    pets.delete(pet) if pet[:name] == name_string
+  end
+  return pet_shop
+end
 
 # def test_remove_pet_by_name
 #   remove_pet_by_name(@pet_shop, "Arthur")
