@@ -10,6 +10,7 @@ def total_cash(pet_shop)
 end
 
 def add_or_remove_cash(pet_shop, money_amount)
+  # I'd prefer if this were named add_or_remove_cash_shop
   pet_shop[:admin][:total_cash] += money_amount
 end
 
@@ -92,7 +93,8 @@ def customer_can_afford_pet(customer, pet)
   return true
 end
 
-# # I HAVE ADDED THESE METHODS PLUS TESTS # #
+# # I HAVE ADDED THESE INDIVIDUAL METHODS PLUS TESTS # #
+# not sure if this is needed at present, but likely to be useful?
 def find_customer_by_name(customer_list, customer_name)
   for customer in customer_list
     return customer if customer[:name] == customer_name
@@ -100,40 +102,19 @@ def find_customer_by_name(customer_list, customer_name)
   return nil
 end
 
+# Doesn't use the 'find_customer_by_name' but could?
+def spend_cash_customer(customer, money_amount)
+  customer[:cash] -= money_amount
+end
 
-#
-# def test_find_customer_by_name__returns_nil
-# end
-
-# def add_or_remove_cash_person(person, money_amount)
-#
-#
-# end
-
-# def test_add_or_remove_cash_person__add
-#   add_or_remove_cash_person(@customers[0], 10)
-#   expected = 1010
-#   cash_person = @customer[0][:cash]
-#   assert_equal(expected, cash_person)
-# end
-#
-# def test_add_or_remove_cash_person__remove
-#   add_or_remove_cash_person(@customers[0], -10)
-#   expected = 990
-#   cash_person = @customer[0][:cash]
-#   assert_equal(expected, cash_person)
-# end
-# # END OF ADDED METHODS # #
+# # END OF ADDED INDIVIDUAL METHODS # #
 
 
-
+# INTEGRATING ALL sMETHODS
 
 def sell_pet_to_customer(pet_shop, pet, customer)
   # check pet is in pet_shop AND
   # check customer can afford pet
-  # # OK - DO I NEED TO AMEND THE FIND PET BY NAME FUNCTION? # #
-  # # OR IS MY LOGIC JUST OFF? # #
-  # # If pet not in petshop, returns 'nil', but test uses that to generate pet...
   if pet == nil
     return
   end
@@ -141,9 +122,9 @@ def sell_pet_to_customer(pet_shop, pet, customer)
     # add price to pet shop funds
     add_or_remove_cash(pet_shop,pet[:price])
     # remove price from customer funds
-    # # THIS DOESN'T EXIST # #
+    # # THIS DOESN'T EXIST IN THE INITIAL SPEC # #
     # # add_or_remove_cash and total_cash apply only to the pet_shop
-
+    spend_cash_customer(customer, pet[:price])
 
     # delete pet from pet shop[:pets]
     remove_pet_by_name(pet_shop, pet[:name])

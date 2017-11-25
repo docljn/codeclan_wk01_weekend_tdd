@@ -164,21 +164,6 @@ class TestPetShop < Minitest::Test
     assert_equal(1, customer_pet_count(customer))
   end
 
-  # # I HAVE ADDED THIS TEST # #
-  def test_add_pet_to_customer__pets_includes_pet
-    customer = @customers[0]
-    add_pet_to_customer(customer, @new_pet)
-    expected = true
-    output = customer[:pets].include?(@new_pet)
-    assert_equal(expected, output)
-  end
-
-
-
-
-
-
-
 
   # # OPTIONAL # #
 
@@ -195,6 +180,15 @@ class TestPetShop < Minitest::Test
   end
 
   # # I HAVE ADDED THESE TESTS # #
+
+  def test_add_pet_to_customer__pets_includes_pet
+    customer = @customers[0]
+    add_pet_to_customer(customer, @new_pet)
+    expected = true
+    output = customer[:pets].include?(@new_pet)
+    assert_equal(expected, output)
+  end
+
   def test_find_customer_by_name__returns_customer
     customer = find_customer_by_name(@customers, "Zsolt")
     actual = customer[:name]
@@ -206,34 +200,21 @@ class TestPetShop < Minitest::Test
   assert_nil(customer)
   end
 
-  #
-  # def test_find_pet_by_name__returns_pet
-  #   pet = find_pet_by_name(@pet_shop, "Arthur")
-  #   actual = pet[:name]
-  #   assert_equal("Arthur", actual)
-  # end
-  #
-  # def test_find_pet_by_name__returns_nil
-  #   pet = find_pet_by_name(@pet_shop, "Fred")
-  #   assert_nil(pet)
-  # end
 
+  def test_spend_cash_customer__spend
+    # I haven't checked for affordability here, but perhaps should have?
+    spend_cash_customer(@customers[0], 10)
+    expected = 990
+    cash_customer = @customers[0][:cash]
+    assert_equal(expected, cash_customer)
+  end
 
-
-
-  # def test_add_or_remove_cash_person__add
-  #   add_or_remove_cash_person(@customers[0], 10)
-  #   expected = 1010
-  #   cash_person = @customer[0][:cash]
-  #   assert_equal(expected, cash_person)
-  # end
-  #
-  # def test_add_or_remove_cash_person__remove
-  #   add_or_remove_cash_person(@customers[0], -10)
-  #   expected = 990
-  #   cash_person = @customer[0][:cash]
-  #   assert_equal(expected, cash_person)
-  # end
+  def spend_cash_customer__refund
+    spend_cash_customer(@customers[0], -10)
+    expected = 1010
+    cash_customer = @customers[0][:cash]
+    assert_equal(expected, cash_customer)
+  end
   # # END OF ADDED TESTS # #
 
 
@@ -272,5 +253,22 @@ class TestPetShop < Minitest::Test
     assert_equal(0, pets_sold(@pet_shop))
     assert_equal(1000, total_cash(@pet_shop))
   end
+
+  # # I HAVE ADDED INTEGRATION TESTS HERE
+  def test_sell_pet_to_customer__customer_funds_change__sufficient_funds
+    customer = @customers[0]
+    pet = find_pet_by_name(@pet_shop,"Arthur")
+
+    sell_pet_to_customer(@pet_shop, pet, customer)
+
+    assert_equal(1, customer_pet_count(customer))
+    assert_equal(1, pets_sold(@pet_shop))
+    assert_equal(1900, total_cash(@pet_shop))
+
+    # my added check
+    assert_equal(100, customer[:cash])
+  end
+
+  # # END OF ADDED INTEGRATION TESTS
 
 end
